@@ -53,7 +53,7 @@
     "glyphs": [
       "--complete"
     ],
-    "extra_args": ["--complete", "--adjust-line-height", "--removeligs", "--careful"]
+    "extra_args": []
   },
   "cn": {
     "enable": true,
