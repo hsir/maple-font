@@ -1253,14 +1253,14 @@ def build_nf(
         )
     )
 
-    nf_sym = f"NF{font_config.get_nf_suffix()}"
-    postscript_name = f"{font_config.family_name_compact}-{nf_sym}-{style_compact_nf}"
+    nf_sym = ""  # Removed suffix
+    postscript_name = f"{font_config.family_name_compact}-{style_compact_nf}"
 
     update_font_names(
         font=nf_font,
-        family_name=f"{font_config.family_name} {nf_sym}{style_nf_with_prefix_space}",
+        family_name=font_config.family_name + style_nf_with_prefix_space,
         style_name=style_in_2,
-        full_name=f"{font_config.family_name} {nf_sym} {style_in_17}",
+        full_name=f"{font_config.family_name} {style_in_17}",
         version_str=font_config.version_str,
         postscript_name=postscript_name,
         unique_identifier=get_unique_identifier(
@@ -1268,7 +1268,7 @@ def build_nf(
             postscript_name=postscript_name,
         ),
         is_skip_subfamily=is_skip_sufamily,
-        preferred_family_name=f"{font_config.family_name} {nf_sym}",
+        preferred_family_name=font_config.family_name,
         preferred_style_name=style_in_17,
     )
 
@@ -1316,13 +1316,13 @@ def build_cn(f: str, font_config: FontConfig, build_option: BuildOption):
         skip_subfamily_list=build_option.base_subfamily_list,
     )
 
-    postscript_name = f"{font_config.family_name_compact}-{build_option.cn_suffix_compact}-{style_compact_cn}"
+    postscript_name = f"{font_config.family_name_compact}-{style_compact_cn}"
 
     update_font_names(
         font=cn_font,
-        family_name=f"{font_config.family_name} {build_option.cn_suffix}{style_cn_with_prefix_space}",
+        family_name=font_config.family_name + style_cn_with_prefix_space,
         style_name=style_in_2,
-        full_name=f"{font_config.family_name} {build_option.cn_suffix} {style_in_17}",
+        full_name=f"{font_config.family_name} {style_in_17}",
         version_str=font_config.version_str,
         postscript_name=postscript_name,
         unique_identifier=get_unique_identifier(
@@ -1331,7 +1331,7 @@ def build_cn(f: str, font_config: FontConfig, build_option: BuildOption):
             narrow=font_config.cn["narrow"],
         ),
         is_skip_subfamily=is_skip_subfamily,
-        preferred_family_name=f"{font_config.family_name} {build_option.cn_suffix}",
+        preferred_family_name=font_config.family_name,
         preferred_style_name=style_in_17,
     )
 

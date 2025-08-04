@@ -6,7 +6,7 @@
   "enable_ligature": false,
   "ttfautohint_param": {},
   "feature_freeze": {
-   "calt": "disable",
+    "calt": "disable",
     "cv01": "enable",
     "cv02": "enable",
     "cv03": "disable",
@@ -55,7 +55,9 @@
     "version": "3.4.0",
     "mono": false,
     "use_font_patcher": false,
-    "glyphs": ["--complete"],
+    "glyphs": [
+      "--complete"
+    ],
     "extra_args": []
   },
   "cn": {
