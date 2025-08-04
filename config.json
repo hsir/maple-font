@@ -33,7 +33,7 @@
     "cv63": "disable",
     "cv64": "disable",
     "cv65": "disable",
-    "cv96": "disable",
+    "cv96": "enable",
     "cv97": "enable",
     "cv98": "enable",
     "cv99": "disable",
