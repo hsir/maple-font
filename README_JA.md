@@ -627,12 +627,12 @@ CN バージョンはデフォルトで無効になっています。`python bui
 
 ```
 usage: build.py [-h] [-v] [-d] [--debug] [-n] [--feat FEAT] [--apply-fea-file]
-                [--hinted | --no-hinted] [--liga | --no-liga]
-                [--keep-infinite-arrow] [--remove-tag-liga]
-                [--line-height LINE_HEIGHT] [--nf-mono] [--nf-propo] [--cn-narrow]
-                [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf] [--cn |
-                --no-cn] [--cn-both] [--ttf-only] [--least-styles] [--font-patcher]
-                [--cache] [--cn-rebuild] [--archive]
+                [--hinted | --no-hinted] [--liga | --no-liga] [--keep-infinite-arrow]
+                [--infinite-arrow] [--remove-tag-liga] [--line-height LINE_HEIGHT]
+                [--nf-mono] [--nf-propo] [--cn-narrow]
+                [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf] [--cn | --no-cn]
+                [--cn-both] [--ttf-only] [--least-styles] [--font-patcher] [--cache]
+                [--cn-rebuild] [--archive]
 
 ✨ Builder and optimizer for Maple Mono
 
@@ -654,7 +654,10 @@ Feature Options:
   --liga                すべてのリガチャを保持（デフォルト）
   --no-liga             すべてのリガチャを削除
   --keep-infinite-arrow
-                        ヒンテッドフォントで無限矢印リガチャを保持します（デフォルトで削除）
+                        （非推奨）ヒンテッドフォントで無限矢印リガチャを保持します
+                        （デフォルトで削除）
+  --infinite-arrow      無限アローリガチャを有効にする（hinted フォントではデフォルト
+                        で無効）
   --remove-tag-liga     純テキストタグのリガチャ、例えば `[TODO]` を削除する。
   --line-height LINE_HEIGHT
                         行の高さのスケールファクター（例：1.1）

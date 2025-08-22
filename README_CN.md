@@ -633,12 +633,12 @@ OpenType Feature 可以控制字体的内置变体和连字。您可以通过修
 
 ```
 usage: build.py [-h] [-v] [-d] [--debug] [-n] [--feat FEAT] [--apply-fea-file]
-                [--hinted | --no-hinted] [--liga | --no-liga]
-                [--keep-infinite-arrow] [--remove-tag-liga]
-                [--line-height LINE_HEIGHT] [--nf-mono] [--nf-propo] [--cn-narrow]
-                [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf] [--cn |
-                --no-cn] [--cn-both] [--ttf-only] [--least-styles] [--font-patcher]
-                [--cache] [--cn-rebuild] [--archive]
+                [--hinted | --no-hinted] [--liga | --no-liga] [--keep-infinite-arrow]
+                [--infinite-arrow] [--remove-tag-liga] [--line-height LINE_HEIGHT]
+                [--nf-mono] [--nf-propo] [--cn-narrow]
+                [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf] [--cn | --no-cn]
+                [--cn-both] [--ttf-only] [--least-styles] [--font-patcher] [--cache]
+                [--cn-rebuild] [--archive]
 
 ✨ Builder and optimizer for Maple Mono
 
@@ -659,7 +659,8 @@ Feature Options:
   --liga                保留所有连字（默认）
   --no-liga             删除所有连字
   --keep-infinite-arrow
-                        在 hinted 字体中保留无限箭头连字（默认删除）
+                        （弃用）在 hinted 字体中保留无限箭头连字（默认删除）
+  --infinite-arrow      开启无限箭头连字 (默认在 hinted 格式中禁用)
   --remove-tag-liga     移除纯文本标签连字，例如 `[TODO]`
   --line-height LINE_HEIGHT
                         行高的缩放因子 (例如 1.1)

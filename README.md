@@ -626,12 +626,12 @@ By enabling `cv99`, all Chinese punctuation marks will be centred. See more deta
 
 ```
 usage: build.py [-h] [-v] [-d] [--debug] [-n] [--feat FEAT] [--apply-fea-file]
-                [--hinted | --no-hinted] [--liga | --no-liga]
-                [--keep-infinite-arrow] [--remove-tag-liga]
-                [--line-height LINE_HEIGHT] [--nf-mono] [--nf-propo] [--cn-narrow]
-                [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf] [--cn |
-                --no-cn] [--cn-both] [--ttf-only] [--least-styles] [--font-patcher]
-                [--cache] [--cn-rebuild] [--archive]
+                [--hinted | --no-hinted] [--liga | --no-liga] [--keep-infinite-arrow]
+                [--infinite-arrow] [--remove-tag-liga] [--line-height LINE_HEIGHT]
+                [--nf-mono] [--nf-propo] [--cn-narrow]
+                [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf] [--cn | --no-cn]
+                [--cn-both] [--ttf-only] [--least-styles] [--font-patcher] [--cache]
+                [--cn-rebuild] [--archive]
 
 ✨ Builder and optimizer for Maple Mono
 
@@ -653,7 +653,9 @@ Feature Options:
   --liga                Preserve all the ligatures (default)
   --no-liga             Remove all the ligatures
   --keep-infinite-arrow
-                        Keep infinite arrow ligatures in hinted font (Removed by
+                        (Deprecated) Keep infinite arrow ligatures in hinted font
+                        (Removed by default)
+  --infinite-arrow      Enable infinite arrow ligatures (Disabled in hinted font by
                         default)
   --remove-tag-liga     Remove plain text tag ligatures like `[TODO]`
   --line-height LINE_HEIGHT
