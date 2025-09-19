@@ -1,6 +1,17 @@
 import json
 from os import environ
 
+default_weight_map = {
+    "thin": 100,
+    "extralight": 200,
+    "light": 300,
+    "regular": 400,
+    "semibold": 500,
+    "medium": 600,
+    "bold": 700,
+    "extrabold": 800,
+}
+
 
 def write_text(file_path: str, content: str, mode: str = "w") -> None:
     if not isinstance(file_path, str) or not file_path:

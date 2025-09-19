@@ -29,11 +29,16 @@ def run_git_command(args: list, cwd=None, check=True):
 
 
 def page(
-    submodule_path: str, var_dir: str, woff2: bool = False, commit: bool = False
+    submodule_path: str,
+    var_dir: str,
+    woff2: bool = False,
+    commit: bool = False,
+    sync: bool = False,
 ) -> None:
     # Switch to main branch
     abs_submodule_path = os.path.abspath(submodule_path)
-    if commit:
+
+    if sync or commit:
         if not os.path.exists(abs_submodule_path):
             print(
                 f"Error: Submodule {submodule_path} does not exist, please run `git submodule update --init` first"
@@ -41,10 +46,25 @@ def page(
             sys.exit(1)
         print("Sync remote")
         run_git_command(["git", "submodule", "update", "--remote"])
-        print("Checkout main")
-        run_git_command(["git", "checkout", "main"], cwd=abs_submodule_path)
-        print("Pull commits")
-        run_git_command(["git", "pull"], cwd=abs_submodule_path)
+        if commit:
+            print("Checkout main")
+            run_git_command(["git", "checkout", "main"], cwd=abs_submodule_path)
+
+            print("Pull commits")
+            run_git_command(["git", "pull"], cwd=abs_submodule_path)
+        elif sync:
+            # Add all changes
+            run_git_command(["git", "add", "."])
+
+            # Commit changes
+            print("Commit sync")
+            run_git_command(["git", "commit", "-m", "sync landing page"])
+
+            # Push to remote
+            print("Push to remote")
+            run_git_command(["git", "push", "origin"])
+
+            return
 
     # Update landing page data
     print("Update features")
@@ -74,7 +94,7 @@ def page(
         + minify(data),
     )
 
-    if woff2 or commit:
+    if woff2:
         print("Update woff2")
         font_dir = joinPaths(submodule_path, "public", "fonts")
         os.system("python build.py --ttf-only --no-nerd-font --least-styles")

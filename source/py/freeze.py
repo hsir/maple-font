@@ -25,9 +25,11 @@ def parse_config(config: dict, calt: bool):
         if is_enable(v):
             result[k] = "1"
         elif is_disable(v):
-            result[k] = "0"
+            result[k] = "-1"
         elif not is_ignore(v):
             invalid_items.append((k, v))
+        else:
+            result[k] = "0"
 
     if len(invalid_items) > 0:
         report = ", ".join([f"{k}: {v}" for k, v in invalid_items])

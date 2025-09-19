@@ -549,9 +549,10 @@ pip install -r requirements.txt
 python build.py
 ```
 
-- For `Ubuntu` or `Debian`, maybe `python-is-python3` is needed as well
-
-If you have trouble installing the dependencies, just create a new GitHub Codespace and run the commands there
+> [!TIP]
+> For `Ubuntu` or `Debian`, maybe `python-is-python3` is needed as well.
+>
+> If you have trouble installing the dependencies, just create a new GitHub Codespace and run the commands there.
 
 #### Custom Nerd-Font
 
@@ -600,7 +601,30 @@ If you would like to modify the feature file instead, run `build.py` with `--app
 
 #### Infinite Arrow Ligatures
 
-Inspired by Fira Code, the font enables infinite arrow ligatures by default from v7.3. For some reason, the ligatures are misaligned when using hinted font, so they are removed in hinted version by default from v7.4. You can setup `"keep_infinite_arrow": true` in `config.json` or add `--keep-infinite-arrow` in cli flag. See more details in [#508](https://github.com/subframe7536/maple-font/issues/508)
+Inspired by Fira Code, the font enables infinite arrow ligatures by default from v7.3. For some reason, the ligatures are misaligned when using hinted font, so they are removed in hinted version by default from v7.4.
+
+You can setup `"infinite_arrow": true` in `config.json` or add `--infinite-arrow` in cli flag to force enabling the feature. See more details in [#508](https://github.com/subframe7536/maple-font/issues/508)
+
+#### Custom Font Weight Mapping
+
+You can modify the static font weight through `"weight_mapping"` item in `config.json`.
+
+For example, if you want to make regular font weight a little bit lighter, just decrease the number of `"weight_mapping.regular"` (from 400 to 350 in this example) :
+
+```json
+{
+  "weight_mapping": {
+    "thin": 100,
+    "extralight": 200,
+    "light": 300,
+    "regular": 350,
+    "semibold": 500,
+    "medium": 600,
+    "bold": 700,
+    "extrabold": 800
+  }
+}
+```
 
 ### Chinese version
 
@@ -652,9 +676,6 @@ Feature Options:
   --no-hinted           Use unhinted font as base font in NF / CN / NF-CN
   --liga                Preserve all the ligatures (default)
   --no-liga             Remove all the ligatures
-  --keep-infinite-arrow
-                        (Deprecated) Keep infinite arrow ligatures in hinted font
-                        (Removed by default)
   --infinite-arrow      Enable infinite arrow ligatures (Disabled in hinted font by
                         default)
   --remove-tag-liga     Remove plain text tag ligatures like `[TODO]`

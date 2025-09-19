@@ -534,6 +534,8 @@ feature calt {
   lookup greater_greater.liga {
     ignore sub [less slash greater] greater' greater;
     ignore sub greater' greater greater;
+    sub greater' greater dollar by SPC;
+    sub SPC greater' by greater_greater.liga;
     sub @QuoteLike SPC greater' @QuoteLike by greater_greater.liga;
     sub @QuoteLike greater' greater @QuoteLike by SPC;
     sub SPC greater' [slash @Number @EqualHyphen] by greater_greater.liga;
@@ -1695,7 +1697,7 @@ feature cv02 {
   };
 
   # Placeholder
-  sub EMquad by SPC;
+  sub EMquad by space;
 
 } cv02;
 
@@ -1708,7 +1710,7 @@ feature cv03 {
   };
 
   # Placeholder
-  sub EMquad by SPC;
+  sub EMquad by space;
 
 } cv03;
 
@@ -1756,7 +1758,7 @@ feature cv05 {
   };
 
   # Placeholder
-  sub EMquad by SPC;
+  sub EMquad by space;
 
 } cv05;
 
@@ -1769,7 +1771,7 @@ feature cv06 {
   };
 
   # Placeholder
-  sub EMquad by SPC;
+  sub EMquad by space;
 
 } cv06;
 
@@ -1782,7 +1784,7 @@ feature cv07 {
   };
 
   # Placeholder
-  sub EMquad by SPC;
+  sub EMquad by space;
 
 } cv07;
 
@@ -1795,7 +1797,7 @@ feature cv08 {
   };
 
   # Placeholder
-  sub EMquad by SPC;
+  sub EMquad by space;
 
 } cv08;
 
@@ -1808,7 +1810,7 @@ feature cv09 {
   };
 
   # Placeholder
-  sub EMquad by SPC;
+  sub EMquad by space;
 
 } cv09;
 
@@ -1821,9 +1823,22 @@ feature cv10 {
   };
 
   # Placeholder
-  sub EMquad by SPC;
+  sub EMquad by space;
 
 } cv10;
+
+feature cv11 {
+
+  cvParameters {
+    FeatUILabelNameID {
+      name "CV11: [Regular Only] Alternative f with bottom bar";
+    };
+  };
+
+  # Placeholder
+  sub EMquad by space;
+
+} cv11;
 
 feature cv31 {
 
@@ -1941,7 +1956,6 @@ feature cv35 {
   sub lcaron by lcaron.cv35;
   sub lcommaaccent by lcommaaccent.cv35;
   sub ldot by ldot.cv35;
-  sub lslash by lslash.cv35;
   sub C_l.liga by C_l.liga.cv35;
   sub a_l.liga by a_l.liga.cv35;
   sub c_l.liga by c_l.liga.cv35;
@@ -1960,7 +1974,6 @@ feature cv35 {
   sub lcaron.cv04 by lcaron.cv35;
   sub lcommaaccent.cv04 by lcommaaccent.cv35;
   sub ldot.cv04 by ldot.cv35;
-  sub lslash.cv04 by lslash.cv35;
   sub C_l.liga.cv04 by C_l.liga.cv35;
   sub a_l.liga.cv04 by a_l.liga.cv35;
   sub c_l.liga.cv04 by c_l.liga.cv35;
@@ -2173,6 +2186,21 @@ feature cv43 {
   sub zdotaccent by zdotaccent.cv43;
 
 } cv43;
+
+feature cv44 {
+
+  cvParameters {
+    FeatUILabelNameID {
+      name "CV44: Alternative Italic f with bottom bar";
+    };
+  };
+
+  sub f by f.cv44;
+  sub f_f.liga by f_f.liga.cv44;
+  sub f.cv32 by f.cv44;
+  sub f_f.liga.cv32 by f_f.liga.cv44;
+
+} cv44;
 
 feature cv61 {
 
@@ -2470,6 +2498,7 @@ feature ss06 {
   sub u_l_l.liga by u_l_l.liga.ss06;
   sub f_f.liga by f_f.liga.ss06;
   sub f_f.liga.cv32 by f_f.liga.cv32.ss06;
+  sub f_f.liga.cv44 by f_f.liga.cv44.ss06;
   sub t_t.liga by t_t.liga.ss06;
 
 } ss06;

@@ -115,9 +115,9 @@ def generate_fea_string(
 
         calt_feat.content.extend(extracted_lookup_list)
 
-    # remove calt if empty, to prevent fonttools warning
+    # Add placeholder to calt if empty, to prevent fonttools warning
     if not calt_feat.content:
-        calt_feat = None
+        calt_feat.content = ast.EMPTY_FEAT_CONTENT
 
     return ast.create(
         [

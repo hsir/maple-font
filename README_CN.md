@@ -554,9 +554,10 @@ pip install -r requirements.txt
 python build.py
 ```
 
-- 对于 `Ubuntu` 或 `Debian`，可能还需要 `python-is-python3`
-
-如果您在安装依赖项时遇到问题，只需创建一个新的 GitHub Codespace 并在那里运行命令
+> [!TIP]
+> 对于 `Ubuntu` 或 `Debian`，可能还需要 `python-is-python3`
+>
+> 如果您在安装依赖项时遇到问题，只需创建一个新的 GitHub Codespace 并在那里运行命令
 
 #### 自定义 Nerd-Font
 
@@ -607,7 +608,30 @@ OpenType Feature 可以控制字体的内置变体和连字。您可以通过修
 
 #### 无限箭头连字
 
-受 Fira Code 的启发，从 v7.3 开始，该字体默认启用无限箭头连字。由于某种原因，在使用 Hinted 字体时连字会错位，因此在 v7.4 的 Hinted 版本中默认将其移除。您可以在 `config.json` 中设置 `"keep_infinite_arrow": true`，或在命令行标志中添加 `--keep-infinite-arrow`。详情见 [#508](https://github.com/subframe7536/maple-font/issues/508)
+受 Fira Code 的启发，从 v7.3 开始，该字体默认启用无限箭头连字。由于某种原因，在使用 Hinted 字体时连字会错位，因此在 v7.4 的 Hinted 版本中默认将其移除。
+
+您可以在 `config.json` 中设置 `"infinite_arrow": true`，或在命令行标志中添加 `--infinite-arrow`。详情见 [#508](https://github.com/subframe7536/maple-font/issues/508)
+
+#### 自定义字重映射
+
+您可以通过 `config.json` 中的 `"weight_mapping"` 项修改静态字体粗细。
+
+例如，如果您想让常规字重稍微细一些，只需将 `"weight_mapping.regular"` 的数值降低（在此示例中从 400 降到 350）：
+
+```json
+{
+  "weight_mapping": {
+    "thin": 100,
+    "extralight": 200,
+    "light": 300,
+    "regular": 350,
+    "semibold": 500,
+    "medium": 600,
+    "bold": 700,
+    "extrabold": 800
+  }
+}
+```
 
 ### 中文版本
 
@@ -658,8 +682,6 @@ Feature Options:
   --no-hinted           在 NF / CN / NF-CN 中使用 unhinted 字体作为基础字体
   --liga                保留所有连字（默认）
   --no-liga             删除所有连字
-  --keep-infinite-arrow
-                        （弃用）在 hinted 字体中保留无限箭头连字（默认删除）
   --infinite-arrow      开启无限箭头连字 (默认在 hinted 格式中禁用)
   --remove-tag-liga     移除纯文本标签连字，例如 `[TODO]`
   --line-height LINE_HEIGHT

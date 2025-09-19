@@ -550,9 +550,10 @@ pip install -r requirements.txt
 python build.py
 ```
 
-- `Ubuntu` または `Debian` の場合、`python-is-python3` も必要な場合があります。
-
-依存関係のインストールに問題がある場合は、新しい GitHub Codespace を作成し、そこでコマンドを実行してください。
+> [!TIP]
+> `Ubuntu` または `Debian` の場合、`python-is-python3` も必要な場合があります。
+>
+> 依存関係のインストールに問題がある場合は、新しい GitHub Codespace を作成し、そこでコマンドを実行してください。
 
 #### カスタム Nerd-Font
 
@@ -601,7 +602,30 @@ OpenType Feature ファイルを直接編集して実現したい場合、`build
 
 #### 無限矢印リガチャ
 
-Fira Codeに着想を得て、このフォントはv7.3からデフォルトで無限の矢印リガチャを有効にします。何らかの理由で、hintedフォントを使用するとリガチャがずれてしまうため、v7.4のhintedバージョンではデフォルトでそれを削除しました。`config.json` に `"keep_infinite_arrow": true` を設定するか、CLI フラグに `--keep-infinite-arrow` を追加してください。詳細は [#508](https://github.com/subframe7536/maple-font/issues/508) を参照してください
+Fira Codeに着想を得て、このフォントはv7.3からデフォルトで無限の矢印リガチャを有効にします。何らかの理由で、hintedフォントを使用するとリガチャがずれてしまうため、v7.4のhintedバージョンではデフォルトでそれを削除しました。
+
+`config.json` に `"infinite_arrow": true` を設定するか、CLI フラグに `--infinite-arrow` を追加してください。詳細は [#508](https://github.com/subframe7536/maple-font/issues/508) を参照してください
+
+#### カスタムフォントウェイトマッピング
+
+`config.json` の `"weight_mapping"` 項目を通じて、静的なフォントのウェイトを変更できます。
+
+たとえば、通常のフォントウェイトを少し軽くしたい場合は、`"weight_mapping.regular"` の数値を下げるだけです（この例では 400 から 350 に変更）：
+
+```json
+{
+  "weight_mapping": {
+    "thin": 100,
+    "extralight": 200,
+    "light": 300,
+    "regular": 350,
+    "semibold": 500,
+    "medium": 600,
+    "bold": 700,
+    "extrabold": 800
+  }
+}
+```
 
 ### 中国語バージョン
 
@@ -653,9 +677,6 @@ Feature Options:
   --no-hinted           NF / CN / NF-CNでヒントなしフォントをベースフォントとして使用
   --liga                すべてのリガチャを保持（デフォルト）
   --no-liga             すべてのリガチャを削除
-  --keep-infinite-arrow
-                        （非推奨）ヒンテッドフォントで無限矢印リガチャを保持します
-                        （デフォルトで削除）
   --infinite-arrow      無限アローリガチャを有効にする（hinted フォントではデフォルト
                         で無効）
   --remove-tag-liga     純テキストタグのリガチャ、例えば `[TODO]` を削除する。
