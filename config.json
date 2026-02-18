@@ -5,17 +5,21 @@
   "pool_size": 4,
   "enable_ligature": false,
   "ttfautohint_param": {},
+  "github_mirror": "github.com",
+  "infinite_arrow": null,
+  "remove_tag_liga": false,
   "weight_mapping": {
     "thin": 100,
     "extralight": 200,
     "light": 300,
     "regular": 400,
-    "semibold": 500,
-    "medium": 600,
+    "medium": 500,
+    "semibold": 600,
     "bold": 700,
     "extrabold": 800
   },
   "line_height": 1.0,
+  "width": "default",
   "feature_freeze": {
     "calt": "disable",
     "cv01": "enable",

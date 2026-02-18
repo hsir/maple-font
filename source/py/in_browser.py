@@ -29,7 +29,8 @@ def freeze_feature(font, moving_rules, config):
         feature.Feature for feature in feature_record if feature.FeatureTag == "calt"
     ]
 
-    if config.get("calt") != "1":
+    enable_calt = config.get("calt") == "1"
+    if not enable_calt:
         for calt_feature in calt_features:
             calt_feature.LookupListIndex.clear()
             calt_feature.LookupCount = 0
@@ -44,7 +45,7 @@ def freeze_feature(font, moving_rules, config):
             indices_to_remove.append(index)
             continue
 
-        if tag in moving_rules:
+        if tag in moving_rules and enable_calt:
             for calt_feature in calt_features:
                 calt_feature.LookupListIndex.extend(target_feature.LookupListIndex)
         else:
@@ -68,9 +69,10 @@ def freeze_feature(font, moving_rules, config):
                         glyph_dict[old_key] = glyph_dict[new_key]
                         hmtx_dict[old_key] = hmtx_dict[new_key]
 
-    # Remove features in reverse order to maintain correct indices
+    # Remove features's lookup list index in reverse order to maintain correct indices
     for index in sorted(indices_to_remove, reverse=True):
-        del feature_list.FeatureRecord[index]
+        feature_list.FeatureRecord[index].Feature.LookupCount = 0
+        feature_list.FeatureRecord[index].Feature.LookupListIndex = []
 
 
 def set_font_name(font, name: str, id: int):

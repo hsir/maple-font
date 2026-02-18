@@ -515,11 +515,15 @@ The [`config.json`](./config.json) file is used to configure the build process. 
 
 There also have some [command line options](#build-script-usage) for customizing the build process. Cli options have higher priority than options in `config.json`.
 
-### Build In Browser
+### Build Methods
+
+#### 1. Build In Browser
 
 Go to [Playground](https://font.subf.dev/en/playground), and click "Custom Build" button in the bottom left corner
 
-### Use Github Actions
+- Only support freezing OpenType features currently.
+
+#### 2. Use Github Actions
 
 You can use [Github Actions](https://github.com/subframe7536/maple-font/actions/workflows/custom.yml) to build the font.
 
@@ -531,7 +535,7 @@ You can use [Github Actions](https://github.com/subframe7536/maple-font/actions/
 6. Wait for the build to finish
 7. Download the font archives from Releases
 
-### Use Docker
+#### 3. Use Docker
 
 ```shell
 git clone https://github.com/subframe7536/maple-font --depth 1 -b variable
@@ -539,7 +543,7 @@ docker build -t maple-font .
 docker run -v "$(pwd)/fonts:/app/fonts" -e BUILD_ARGS="--normal" maple-font
 ```
 
-### Local Build
+#### 4. Local Build
 
 Clone the repo and run on your local machine. Make sure you have `python3` and `pip` installed
 
@@ -554,7 +558,18 @@ python build.py
 >
 > If you have trouble installing the dependencies, just create a new GitHub Codespace and run the commands there.
 
-#### Custom Nerd-Font
+### Narrow Glyph Width
+
+You can setup `"width": "narrow"` in `config.json` or add `--width slim` in cli flag to change glyph width at build time.
+
+There are 3 options:
+- default: 600
+- narrow: 550
+- slim: 500
+
+Preview: [#131](https://github.com/subframe7536/maple-font/issues/131#issuecomment-3678666194)
+
+### Custom Nerd-Font
 
 If you want to get fixed width icons, setup `"nerd_font.mono": true` in `config.json` or add `--nf-mono` flag to build script args.
 
@@ -568,7 +583,7 @@ Default args: `-l --careful --outputdir dir`
 - if `"nerd_font.propo"` is `true`, then add `--variable-width-glyphs`
 - else if `"nerd_font.mono"` is `true`, then add `--mono`
 
-#### Preset
+### Preset
 
 Run `build.py` with `--normal` flag, make the font looks not such "Opinioned" , just like `JetBrains Mono` (with slashed zero).
 
@@ -583,7 +598,7 @@ cv01, cv02, cv33, cv34, cv35, cv36, cv61, cv62, ss05, ss06, ss07, ss08
 
 [Online Preview](https://font.subf.dev/en/playground?normal)
 
-#### Font Feature Freeze
+### Freeze OpenType Feature
 
 There are three kinds of options for feature freeze ([Why](https://github.com/subframe7536/maple-font/issues/233#issuecomment-2410170270)):
 
@@ -597,15 +612,15 @@ OpenType Feature is used to control the font's built-in variants and ligatures. 
 
 By default, the Python module in [`source/py/feature/`](./source/py/feature) will generate feature rule string and load it at build time. You can modify the features or customize tags there.
 
-If you would like to modify the feature file instead, run `build.py` with `--apply-fea-file` flag, the feature file from [`source/features/{regular,italic}.fea`](./source/features) will be loaded.
+If you would like to modify the feature file instead, run `build.py` with `--apply-fea-file` flag, the feature file from [`source/features/{regular,italic}{_cn,}.fea`](./source/features) will be loaded.
 
-#### Infinite Arrow Ligatures
+### Infinite Arrow Ligatures
 
 Inspired by Fira Code, the font enables infinite arrow ligatures by default from v7.3. For some reason, the ligatures are misaligned when using hinted font, so they are removed in hinted version by default from v7.4.
 
 You can setup `"infinite_arrow": true` in `config.json` or add `--infinite-arrow` in cli flag to force enabling the feature. See more details in [#508](https://github.com/subframe7536/maple-font/issues/508)
 
-#### Custom Font Weight Mapping
+### Custom Font Weight Mapping
 
 You can modify the static font weight through `"weight_mapping"` item in `config.json`.
 
@@ -634,9 +649,9 @@ If you want to build CN base fonts from variable (about 27 MB), setup `"cn.use_s
 
 #### Narrow spacing in CN glyphs
 
-If you think that **CN glyphs spacing is TOOOOOO large**, there is a build option `cn.narrow` or cli flag `--cn-narrow` to narrow spacing in CN glyphs, but this will make the font cannot be recogized as monospaced font.
+If you think that **CN glyphs spacing is TOOOOOO large**, there is a build option `cn.narrow` or cli flag `--cn-narrow` to narrow spacing in CN glyphs, but this will make the font cannot be recogized as monospaced font. You can see effect in [#249](https://github.com/subframe7536/maple-font/issues/249#issuecomment-2871260476).
 
-You can see effect in [#249](https://github.com/subframe7536/maple-font/issues/249#issuecomment-2871260476).
+And if you want to change the Latin letters' width as well, use [`--width` option](#narrow-glyph-width)
 
 #### GitHub Mirror
 
@@ -652,10 +667,10 @@ By enabling `cv99`, all Chinese punctuation marks will be centred. See more deta
 usage: build.py [-h] [-v] [-d] [--debug] [-n] [--feat FEAT] [--apply-fea-file]
                 [--hinted | --no-hinted] [--liga | --no-liga] [--keep-infinite-arrow]
                 [--infinite-arrow] [--remove-tag-liga] [--line-height LINE_HEIGHT]
-                [--nf-mono] [--nf-propo] [--cn-narrow]
-                [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf] [--cn | --no-cn]
-                [--cn-both] [--ttf-only] [--least-styles] [--font-patcher] [--cache]
-                [--cn-rebuild] [--archive]
+                [--width {default,narrow,slim}] [--nf-mono] [--nf-propo]
+                [--cn-narrow] [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf]
+                [--cn | --no-cn] [--cn-both] [--ttf-only] [--least-styles]
+                [--font-patcher] [--cache] [--cn-rebuild] [--archive]
 
 ✨ Builder and optimizer for Maple Mono
 
@@ -681,6 +696,8 @@ Feature Options:
   --remove-tag-liga     Remove plain text tag ligatures like `[TODO]`
   --line-height LINE_HEIGHT
                         Scale factor for line height (e.g. 1.1)
+  --width {default,narrow,slim}
+                        Set glyph width: default (600), narrow (550), slim (500)
   --nf-mono             Make Nerd Font icons' width fixed
   --nf-propo            Make Nerd Font icons' width variable, override `--nf-mono`
   --cn-narrow           Make CN / JP characters narrow (And the font cannot be
@@ -724,9 +741,11 @@ uv run task.py nerd-font
 # Update fea file
 uv run task.py fea
 # Update landing page info
-uv run task.py page
+uv run task.py page --sync
+# Merge two fonts
+uv run task.py merge
 # Release
-uv run task.py release 7.0
+uv run task.py release minor
 ```
 
 ## Credit
@@ -753,7 +772,13 @@ or sponser me through [Afdian](https://afdian.com/a/subframe7536)
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=subframe7536/maple-font&type=Date)](https://www.star-history.com/#subframe7536/maple-font&Date)
+<a href="https://www.star-history.com/#subframe7536/maple-font&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=subframe7536/maple-font&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=subframe7536/maple-font&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=subframe7536/maple-font&type=date&legend=top-left" />
+ </picture>
+</a>
 
 ## License
 
