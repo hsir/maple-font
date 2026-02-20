@@ -557,7 +557,7 @@ class FontConfig:
             name_arr.append("Normal")
 
         if not self.enable_ligature:
-            name_arr.append("NL")
+            # name_arr.append("NL") # Remove suffix
 
         width_name = self.get_width_name()
         if width_name:

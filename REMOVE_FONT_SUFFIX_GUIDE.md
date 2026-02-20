@@ -176,6 +176,22 @@ suffix = get_font_suffix(mono, propo)
 _path = f"source/MapleMono{f'-{suffix}' if suffix else ''}.ttf"
 ```
 
+### Step 4: Remove "NL"
+
+Find the `_update_family_names()` function in `build.py`:
+
+**Change 1:**
+
+```python
+# Original:
+if not self.enable_ligature:
+  name_arr.append("NL")
+
+# Replace with:
+if not self.enable_ligature:
+    # name_arr.append("NL") # Remove suffix
+```
+
 ## Result
 
 After these changes, all generated fonts will use clean names:
