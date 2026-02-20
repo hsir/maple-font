@@ -128,14 +128,15 @@ def build_nf(mono: bool, propo: bool = False):
     nf_font = TTFont(_path)
     remove(_path)
 
-    # Set font names
-    full_family_name = f"{family_name} NF Base{f' {suffix}' if suffix else ''}"
+    # Set font names - using clean family name without "NF Base" suffix
+    base_suffix = f" {suffix}" if suffix else ""
+    full_family_name = f"{family_name}{base_suffix}"
     set_font_name(nf_font, full_family_name, 1)
     set_font_name(nf_font, style_name, 2)
     set_font_name(nf_font, f"{full_family_name} {style_name}", 4)
     set_font_name(
         nf_font,
-        f"{family_name.replace(' ', '-')}-NF-Base{f'-{suffix}' if suffix else ''}-{style_name}",
+        f"{family_name.replace(' ', '-')}{f'-{suffix}' if suffix else ''}-{style_name}",
         6,
     )
     del_font_name(nf_font, 16)
@@ -153,7 +154,7 @@ def subset(mono: bool, propo: bool, unicodes: list[int]):
     subsetter.subset(font)
 
     suffix = get_font_suffix(mono, propo)
-    _path = f"source/MapleMono-NF-Base{f'-{suffix}' if suffix else ''}.ttf"
+    _path = f"source/MapleMono{f'-{suffix}' if suffix else ''}.ttf"
 
     font.save(_path)
     # Apply monospace fix only for non-proportional versions
