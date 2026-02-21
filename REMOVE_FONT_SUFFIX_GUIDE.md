@@ -188,8 +188,9 @@ if not self.enable_ligature:
   name_arr.append("NL")
 
 # Replace with:
-if not self.enable_ligature:
-  name_arr.append("") # Remove suffix
+# Remove suffix
+# if not self.enable_ligature:
+#     name_arr.append("NL") 
 ```
 
 ## Result
